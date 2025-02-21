@@ -9,7 +9,7 @@ const WeatherApp = () => {
     const fetchWeather = async () => {
       setError(null);
       try {
-          const response = await fetch(`http://127.0.0.1:5000/weather?city=${city}`);
+          const response = await fetch(`https://weather-dashboard-backend-fyrl.onrender.com/weather?city=${city}`);
           const data = await response.json();
           if (response.ok) {
               setWeather(data);
