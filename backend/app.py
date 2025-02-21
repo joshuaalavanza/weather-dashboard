@@ -1,12 +1,17 @@
 from flask import Flask, request, jsonify
 import requests
 from flask_cors import CORS
+import os  # Added for environment variables
 
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = "2ce3868589715fcf2f22843edacac7f5"  # Replace with your actual API key
+API_KEY = os.getenv("API_KEY")  # Fetch API key from environment
 BASE_URL = "https://api.openweathermap.org/data/2.5/"
+
+@app.route("/", methods=["GET"])
+def home():
+    return "Flask API is running!", 200  # Added a default route
 
 @app.route("/weather", methods=["GET"])
 def get_weather():
@@ -30,4 +35,5 @@ def get_weather():
     })
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=False)
+
